@@ -15,9 +15,9 @@ export const POST = async (request: NextRequest) => {
     const client = await clientPromise;
     const db = client.db("streamo");
 
-    const body = await request.json()
+    // const body = await request.json()
 
-    const newStreamer = { _id: Date.now() as unknown as ObjectId, name: body }
+    const newStreamer = { _id: Date.now() as unknown as ObjectId, name: '12312341' }
     await db.collection("streamers").insertOne(newStreamer);
 
     return NextResponse.json({ message: `Streamer Added` });
