@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
-import clientPromise from "../../../lib/mongodb";
 import type { NextRequest } from 'next/server';
 import type { ObjectId } from 'mongodb';
+import { connectToMongo } from '@/utils/connectToMongo';
 
-export const GET = async (req: NextRequest) => {
-    const client = await clientPromise;
-    const db = client.db("streamo");
+export const GET = async (request: NextRequest) => {
+    const db = await connectToMongo();
 
     const streamers = await db.collection("streamers").find({}).toArray();
 
@@ -13,12 +12,11 @@ export const GET = async (req: NextRequest) => {
 }
 
 export const POST = async (request: NextRequest) => {
-    const client = await clientPromise;
-    const db = client.db("streamo");
+    const db = await connectToMongo();
 
     const body = await request.json()
 
-    const newStreamer = { _id: Date.now() as unknown as ObjectId, name: body.name }
+    const newStreamer = { _id: Date.now() as unknown as ObjectId, ...body }
     await db.collection("streamers").insertOne(newStreamer);
 
     return NextResponse.json({ message: `Streamer ${body.name} Added` });

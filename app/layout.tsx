@@ -1,7 +1,7 @@
-import './globals.sass'
-import { Inter } from 'next/font/google'
+import { Lato } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+import './globals.sass'
+const lato = Lato({ weight: ['300', '400', '700'], subsets: ['latin'] })
 
 export const metadata = {
   title: 'StreamO',
@@ -15,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={lato.className}>
+        {children}
+      </body>
     </html>
   )
 }

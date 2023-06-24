@@ -1,5 +1,10 @@
-export const fetchStreamers = async () => {
-    const response = await fetch('/api/streamers', {
+type Id = number | null;
+
+export const fetchStreamers = async (id?: Id) => {
+
+    const apiUrl = id ? `/api/streamer/${id}` : '/api/streamers'
+
+    const response = await fetch(apiUrl, {
         method: 'GET'
     });
 

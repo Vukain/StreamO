@@ -1,20 +1,20 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import clientPromise from "../../../../lib/mongodb";
-import { ObjectId } from 'mongodb';
+import type { ObjectId } from 'mongodb';
 
-export const GET = async (req: NextRequest) => {
-    const client = await clientPromise;
-    const db = client.db("streamo");
+import { connectToMongo } from '@/utils/connectToMongo';
+import { getStreamerId } from '@/utils/getStreamerId';
 
-    const regex = /streamer[\/](\d+)/;
-    const url = req.url;
-    const id = parseInt(url.match(regex)![1]) as unknown as ObjectId
-    // alert(s.match(r));
+export const GET = async (request: NextRequest) => {
 
-    // console.log(url.match(regex)![1])
+    const db = await connectToMongo();
+    const id = getStreamerId(request.url);
 
     const streamer = await db.collection("streamers").findOne({ "_id": id });
 
-    return NextResponse.json(streamer);
+    if (streamer) {
+        return NextResponse.json(streamer);
+    } else {
+        return NextResponse.json({ error: 'Steamer not found' }, { status: 404 })
+    }
 }
