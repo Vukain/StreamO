@@ -11,15 +11,15 @@ export const GET = async () => {
     return NextResponse.json(streamers);
 }
 
-export const POST = async (request: Request) => {
+export const POST = async (request: NextRequest) => {
     const client = await clientPromise;
     const db = client.db("streamo");
 
 
-    // const body = JSON.parse(request.body)
+    const body = await request.json()
 
     const newStreamer = { _id: Date.now() as unknown as ObjectId, name: 'test post' }
     await db.collection("streamers").insertOne(newStreamer);
 
-    return NextResponse.json({ message: `Streamer ${newStreamer.name} Added`, request: request });
+    return NextResponse.json({ message: `Streamer ${newStreamer.name} Added`, body: body });
 }
