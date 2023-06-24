@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import clientPromise from "../../../lib/mongodb";
+import { ObjectId } from 'mongodb';
 
 export const GET = async () => {
     const client = await clientPromise;
@@ -16,7 +17,9 @@ export const POST = async (request: NextRequest) => {
     const client = await clientPromise;
     const db = client.db("streamo");
 
-    const newStreamer = { name: 'test post' }
+
+    const id = 20 as unknown as ObjectId
+    const newStreamer = { _id: id, name: 'test post' }
     const streamers = await db.collection("streamers").insertOne(newStreamer);
 
 
