@@ -18,8 +18,8 @@ export const POST = async (request: NextRequest) => {
 
     const body = await request.json()
 
-    const newStreamer = { _id: Date.now() as unknown as ObjectId, name: 'test post' }
+    const newStreamer = { _id: Date.now() as unknown as ObjectId, name: body }
     await db.collection("streamers").insertOne(newStreamer);
 
-    return NextResponse.json({ message: `Streamer ${newStreamer.name} Added`, body: body });
+    // return NextResponse.json({ message: `Streamer ${newStreamer.name} Added`, body: body });
 }
