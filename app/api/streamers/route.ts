@@ -6,7 +6,7 @@ import { connectToMongo } from '@/utils/connectToMongo';
 export const GET = async (request: NextRequest) => {
     const db = await connectToMongo();
 
-    const streamers = await db.collection("streamers").find({}).toArray();
+    const streamers = await db.collection("streamers").find({}).sort({ score: -1 }).toArray();
 
     return NextResponse.json(streamers);
 }

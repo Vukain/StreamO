@@ -15,7 +15,7 @@ export const StreamerList: React.FC = () => {
         fetchStreamers().then(response => setStreamers(response));
     };
 
-    console.log(streamers)
+    // console.log(streamers)
 
     return (
         <article>
