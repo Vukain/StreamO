@@ -11,13 +11,13 @@ export const PUT = async (request: NextRequest) => {
 
     const body = await request.json()
 
-
-
     const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: 1 } });
 
-    if (streamer) {
-        return NextResponse.json(streamer);
-    } else {
-        return NextResponse.json({ error: 'Steamer not found' }, { status: 404 })
-    }
+    return NextResponse.json({ message: 'Score added!' }, { status: 200 });
+
+    // if (streamer) {
+    //     return NextResponse.json(streamer);
+    // } else {
+    //     return NextResponse.json({ error: 'Steamer not found' }, { status: 404 })
+    // }
 }
