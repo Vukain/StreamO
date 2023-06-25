@@ -10,7 +10,6 @@
     height: 8vh
     border-radius: calc(.8 * var(--border-radius))
     transition: .3s background-color ease
-    // filter: saturate(.4)
     @include flex-center
     &::before
         @include before-after
@@ -21,10 +20,10 @@
         left: -.4vh
         right: -.4vh
         z-index: -1
-        transition: .3s filter ease
-        filter: saturate(.4)
+        transition: .4s filter ease
+        filter: saturate(.5)
 
     &:hover
-        background-color: var(--background-color-3)
+        // background-color: var(--background-color-3)
         &::before
             filter: saturate(1)

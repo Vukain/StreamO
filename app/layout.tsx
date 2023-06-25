@@ -1,6 +1,11 @@
 import { Lato } from 'next/font/google'
 
 import './globals.sass'
+import { Logo } from '@/ui/Logo/Logo'
+
+
+
+
 const lato = Lato({ weight: ['300', '400', '700'], subsets: ['latin'] })
 
 export const metadata = {
@@ -16,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lato.className}>
+        <Logo />
         {children}
       </body>
     </html>

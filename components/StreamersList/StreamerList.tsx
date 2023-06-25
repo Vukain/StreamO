@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './StreamerList.module.sass';
 import { fetchStreamers } from '@/utils/fetchStreamers';
 import { StreamerSummaryCard } from './StreamerSummaryCard/StreamerSummaryCard';
+import { LoadingSpinner } from '@/ui/LoadingSpinner/LoadingSpinner';
 
 export const StreamerList: React.FC = () => {
 
@@ -17,7 +18,7 @@ export const StreamerList: React.FC = () => {
 
     return (
         <article className={styles.toplist}>
-            {streamers !== null ? streamers.map((streamer, index) => (<StreamerSummaryCard data={streamer} syncStreamers={syncStreamers} key={index} />)) : <p>Loading streamers</p>}
+            {streamers !== null ? streamers.map((streamer, index) => (<StreamerSummaryCard data={streamer} syncStreamers={syncStreamers} key={index} />)) : <LoadingSpinner />}
         </article>
     );
 }
