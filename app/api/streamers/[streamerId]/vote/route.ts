@@ -9,9 +9,13 @@ export const PUT = async (request: NextRequest) => {
     const db = await connectToMongo();
     const id = getStreamerId(request.url);
 
-    const body = await request.json()
+    // const body = await request.json()
 
-    const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: 1 } });
+    try {
+        const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: 1 } });
+    } catch (e) {
+        return NextResponse.json({ error: e })
+    }
 
     return NextResponse.json({ message: 'Score added!' }, { status: 200 });
 

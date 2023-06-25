@@ -16,8 +16,8 @@ export const StreamerList: React.FC = () => {
     };
 
     return (
-        <article>
-            {streamers !== null ? streamers.map((streamer, index) => (<StreamerSummaryCard data={streamer} key={index} />)) : <p>Loading streamers</p>}
+        <article className={styles.toplist}>
+            {streamers !== null ? streamers.map((streamer, index) => (<StreamerSummaryCard data={streamer} syncStreamers={syncStreamers} key={index} />)) : <p>Loading streamers</p>}
         </article>
     );
 }

@@ -1,2 +1,30 @@
+@import '../../../styles/mixins'
+
 .card
+    position: relative
     font-size: 2rem
+    cursor: pointer
+    background-color: var(--background-color-2)
+    padding: 1rem
+    width: 40vw
+    height: 8vh
+    border-radius: calc(.8 * var(--border-radius))
+    transition: .3s background-color ease
+    // filter: saturate(.4)
+    @include flex-center
+    &::before
+        @include before-after
+        background: var(--gradient)
+        border-radius: var(--border-radius)
+        top: -.4vh
+        bottom: 0
+        left: -.4vh
+        right: -.4vh
+        z-index: -1
+        transition: .3s filter ease
+        filter: saturate(.4)
+
+    &:hover
+        background-color: var(--background-color-3)
+        &::before
+            filter: saturate(1)

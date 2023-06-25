@@ -1,6 +1,8 @@
 'use client'
 
 import { StreamerList } from "@/components/StreamersList/StreamerList";
+import styles from './page.module.sass'
+
 import { fetchStreamers } from "../../utils/fetchStreamers";
 import { postStreamer } from "../../utils/postStreamer";
 
@@ -20,7 +22,7 @@ const Streamers = () => {
     };
 
     return (
-        <main >
+        <main className={styles.main}>
             <StreamerList />
             {/* <button onClick={() => fetchStreamers()}>Get</button>
             <button onClick={() => postStreamer(testData)}>Post</button> */}

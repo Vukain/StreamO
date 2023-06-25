@@ -1,13 +1,20 @@
+import { voteStreamer } from '@/utils/voteStreamer';
 import styles from './StreamerSummaryCard.module.sass';
 
 type Props = {
-    data: Streamer
+    data: Streamer,
+    syncStreamers: any
 };
 
-export const StreamerSummaryCard: React.FC<Props> = ({ data: { _id, name, score } }) => {
+export const StreamerSummaryCard: React.FC<Props> = ({ data: { _id, name, score }, syncStreamers }) => {
+
+    const voteAndRefresh = () => {
+        voteStreamer(_id);
+        setTimeout(() => { syncStreamers() }, 500)
+    }
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={voteAndRefresh}>
             {name} - {score}
         </div>
     );
