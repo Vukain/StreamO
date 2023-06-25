@@ -15,8 +15,6 @@ export const StreamerList: React.FC = () => {
         fetchStreamers().then(response => setStreamers(response));
     };
 
-    // console.log(streamers)
-
     return (
         <article>
             {streamers !== null ? streamers.map((streamer, index) => (<StreamerSummaryCard data={streamer} key={index} />)) : <p>Loading streamers</p>}

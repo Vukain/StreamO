@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import type { ObjectId } from 'mongodb';
 
 import { connectToMongo } from '@/utils/connectToMongo';
 import { getStreamerId } from '@/utils/getStreamerId';
