@@ -1,29 +1,60 @@
 @import '../../../styles/mixins'
 
 .card
+    @include flex-center
     position: relative
     font-size: 2rem
     cursor: pointer
     background-color: var(--background-color-2)
-    padding: 1rem
-    width: 40vw
+    padding: 0 1vw
+    width: 30vw
     height: 8vh
     border-radius: calc(.8 * var(--border-radius))
     transition: .3s background-color ease
-    @include flex-center
+    justify-content: flex-start
+    gap: 1vw
+    z-index: 1
     &::before
         @include before-after
         background: var(--gradient)
         border-radius: var(--border-radius)
         top: -.4vh
-        bottom: 0
+        bottom: 1px
         left: -.4vh
         right: -.4vh
-        z-index: -1
+        z-index: -5
         transition: .4s filter ease
-        filter: saturate(.5)
-
+        filter: saturate(.6)
+    &::after
+        @include before-after
+        z-index: -4
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: var(--background-color-2)
+        border-radius: calc(.8 * var(--border-radius))
     &:hover
-        // background-color: var(--background-color-3)
         &::before
             filter: saturate(1)
+
+    @media (orientation: portrait)
+        width: 80vw
+        height: 10vh
+
+.name
+    color: var(--color-font)
+    font-size: 1.2vw
+    // padding: .4rem .8rem
+    // border-radius: var(--border-radius)
+    // background: var(--gradient)
+
+.score
+    font-weight: bold
+    color: #bbb
+    font-size: 1.2vw
+
+.green
+    color: #73bb51
+.red
+    color: #c44040

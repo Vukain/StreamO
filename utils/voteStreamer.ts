@@ -6,11 +6,10 @@ export const voteStreamer = async (id: Id, value?: number) => {
 
     const response = await fetch(apiUrl, {
         method: 'PUT'
-    });
+    })
 
-    // const streamers = await response.json();
+    const message = await response.json()
+    // console.log(response.status)
 
-    console.log(response.status)
-
-    // return streamers;
+    return message;
 };

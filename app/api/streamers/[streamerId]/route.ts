@@ -12,8 +12,8 @@ export const GET = async (request: NextRequest) => {
     const streamer = await db.collection("streamers").findOne({ "_id": id });
 
     if (streamer) {
-        return NextResponse.json(streamer);
+        return NextResponse.json({ data: streamer }, { status: 200 })
     } else {
         return NextResponse.json({ error: 'Steamer not found' }, { status: 404 })
-    }
+    };
 }

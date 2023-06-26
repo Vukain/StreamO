@@ -11,17 +11,26 @@ export const PUT = async (request: NextRequest) => {
 
     // const body = await request.json()
 
-    try {
-        const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: 1 } });
-    } catch (e) {
-        return NextResponse.json({ error: e })
-    }
+    const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: 1 } });
 
-    return NextResponse.json({ message: 'Score added!' }, { status: 200 });
+    if (streamer.modifiedCount != 0) {
+        return NextResponse.json({ message: 'Streamer updated.' }, { status: 201 });
+    } else {
+        return NextResponse.json({ error: 'Streamer not found.' }, { status: 404 });
+    };
+}
 
-    // if (streamer) {
-    //     return NextResponse.json(streamer);
-    // } else {
-    //     return NextResponse.json({ error: 'Steamer not found' }, { status: 404 })
-    // }
+export const PATCH = async (request: NextRequest) => {
+
+    const db = await connectToMongo();
+    const id = getStreamerId(request.url);
+
+    const body = await request.json()
+    const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: body.score } });
+
+    if (streamer.modifiedCount != 0) {
+        return NextResponse.json({ message: 'Streamer updated.' }, { status: 201 });
+    } else {
+        return NextResponse.json({ error: 'Streamer not found.' }, { status: 404 });
+    };
 }

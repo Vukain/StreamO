@@ -1,5 +1,7 @@
+import { clsx } from 'clsx'
 import { voteStreamer } from '@/utils/voteStreamer';
 import styles from './StreamerSummaryCard.module.sass';
+import { Avatar } from '@/ui/Avatar/Avatar';
 
 type Props = {
     data: Streamer,
@@ -8,14 +10,21 @@ type Props = {
 
 export const StreamerSummaryCard: React.FC<Props> = ({ data: { _id, name, score }, syncStreamers }) => {
 
-    const voteAndRefresh = () => {
-        voteStreamer(_id);
-        setTimeout(() => { syncStreamers() }, 500)
-    }
+    const voteAndRefresh = async () => {
+        voteStreamer(_id).then(res => {
+            setTimeout(() => {
+                syncStreamers();
+            }, 50)
+        });
+    };
 
     return (
         <div className={styles.card} onClick={voteAndRefresh}>
-            {name} - {score}
+
+            <div className={clsx(styles.score, score > 0 && styles.green, score < 0 && styles.red)}>{score}</div>
+            <Avatar miniature={true} />
+            <div className={styles.name}>{name}</div>
+
         </div>
     );
 };

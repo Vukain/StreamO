@@ -6,14 +6,19 @@ import { LoadingSpinner } from '@/ui/LoadingSpinner/LoadingSpinner';
 
 export const StreamerList: React.FC = () => {
 
-    const [streamers, setStreamers] = useState<null | Array<any>>(null);
+    const [streamers, setStreamers] = useState<null | Array<Streamer>>(null);
 
     useEffect(() => {
         syncStreamers();
     }, [])
 
-    const syncStreamers = () => {
-        fetchStreamers().then(response => setStreamers(response));
+    const syncStreamers = async () => {
+        try {
+            const streamers = await fetchStreamers();
+            setStreamers(streamers);
+        } catch (error) {
+            console.log(error)
+        };
     };
 
     return (
