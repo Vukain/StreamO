@@ -8,15 +8,24 @@
   box-sizing: inherit
 
 html
-  --background-color: #121212
-  --background-color-2: #2a2a2c
-  --background-color-3: #39383f
+  --color-background-1: #121212
+  --color-background-2: #2a2a2c
+  --color-background-3: #39383f
+  --color-backdrop: #7e18ad25
+  --color-primary-1: #42a1c2
+  --color-primary-2: #7b3e8b
+  --color-subsidiary-1: #42a1c2
+  --color-subsidiary-2: #7b3e8b
   --color-font: #dfdfdf
+
   --gradient: linear-gradient(90deg, #42a1c2 0%, #7b3e8b 100%)
   --border-radius: 1.5vh
-  color: #dfdfdf
+  --font-size-normal: 1.2vw
+
   font-size: 62.5%
   letter-spacing: .25em
+  @media (orientation: portrait)
+    --font-size-normal: 4vw
 
 html,
 body
@@ -24,6 +33,6 @@ body
   max-width: 100vw
   min-height: 100vh
   overflow-x: hidden
-  background-color: var(--background-color)
-  // background-image: radial-gradient(ellipse at bottom right, #1d2232 0%, #121212 40%)
+  background-color: var(--color-background-1)
+  color: var(--color-font)
   background-image: linear-gradient(140deg, #1d2232 0%, #121212 35% 65%, #221b2b 100%)

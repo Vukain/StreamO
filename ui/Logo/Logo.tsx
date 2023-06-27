@@ -12,6 +12,7 @@ export const Logo: React.FC = () => {
                 src={LogoImage}
                 alt="streamo logo"
                 sizes="(orientation: portrait) 60vw, 20vw"
+                priority={true}
             />
             {/* <LogoImage className={styles.logo} /> */}
 

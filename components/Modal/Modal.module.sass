@@ -1,0 +1,63 @@
+@import '../../styles/mixins'
+
+@keyframes showing-modal
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+@keyframes hiding-modal
+    0%
+        opacity: 1
+    100%
+        opacity: 0
+
+@keyframes showing-card
+    0%
+        opacity: 0
+        scale: .95
+    100%
+        opacity: 1
+        scale: 1
+
+@keyframes hiding-card
+    0%
+        opacity: 1
+        scale: 1
+    100%
+        opacity: 0
+        scale: 0.95
+
+.modal
+    position: fixed
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    z-index: 9999999999
+    display: flex
+    padding: 10vh 30vw
+    @media (orientation: portrait)
+        padding: 10vw 10vw
+    &::before
+        @include before-after
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: var(--color-backdrop)
+        backdrop-filter: blur(10px)
+        animation: showing-modal .5s both
+
+.hiding
+    &::before
+        animation: hiding-modal .5s .2s both
+
+.card
+    width: 100%
+    height: 100%
+    position: relative
+    animation: showing-card .3s .3s both
+
+.hiding_card
+    animation: hiding-card .3s both
