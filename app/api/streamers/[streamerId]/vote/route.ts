@@ -11,7 +11,7 @@ export const PUT = async (request: NextRequest) => {
 
     // const body = await request.json()
 
-    const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: 1 } });
+    const streamer = await db.collection("streamers").updateOne({ "streamerId": id }, { $inc: { score: 1 } });
 
     if (streamer.modifiedCount != 0) {
         return NextResponse.json({ message: 'Streamer updated.' }, { status: 201 });
@@ -26,7 +26,7 @@ export const PATCH = async (request: NextRequest) => {
     const id = getStreamerId(request.url);
 
     const body = await request.json()
-    const streamer = await db.collection("streamers").updateOne({ "_id": id }, { $inc: { score: body.score } });
+    const streamer = await db.collection("streamers").updateOne({ "streamerId": id }, { $inc: { score: body.score } });
 
     if (streamer.modifiedCount != 0) {
         return NextResponse.json({ message: 'Streamer updated.' }, { status: 201 });

@@ -16,7 +16,7 @@ export const POST = async (request: NextRequest) => {
     const db = await connectToMongo();
     const body = await request.json()
 
-    const newStreamer = { _id: Date.now() as unknown as ObjectId, ...body }
+    const newStreamer = { ...body }
     await db.collection("streamers").insertOne(newStreamer);
 
     return NextResponse.json({ message: `Streamer ${body.name} Added` }, { status: 201 });

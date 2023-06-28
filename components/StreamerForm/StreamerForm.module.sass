@@ -3,3 +3,86 @@
 .form
     display: flex
     flex-direction: column
+    justify-content: flex-start
+
+    width: 100%
+    height: 100%
+    gap: 3vh
+    padding: 4vh
+
+.input_group
+    align-self: stretch
+    display: flex
+    flex-direction: column
+    position: relative
+    gap: 1vh
+
+.link_group
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 2vh
+
+.input, .textarea, .select
+    all: unset
+    position: relative
+    padding: .8vh 1.5vh
+    color: #f0ebf5
+    background-color: var(--color-background-3)
+    border-radius: calc(.7 * var(--border-radius))
+    font-size: var(--font-size-normal)
+    border: .2vh solid transparent
+    transition: border-color .2s
+    &::placeholder
+        color: var(--color-placeholder)
+        text-transform: uppercase
+
+.textarea
+    height: 20vh
+
+.select
+    text-transform: uppercase
+    position: relative
+    background-color: var(--color-background-3)
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%233aa7cc%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')
+    background-repeat: no-repeat
+    padding-right: 2em
+    background-position: right .7em top 50%
+    background-size: .65em auto
+    &:focus
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%233aa7cc%22%20d%3D%22M287%2C223c-3.4%2C3.5-8.1%2C5.5-13%2C5.4H18.4c-5%2C0-9.3-1.8-12.9-5.4C2%2C219.7%2C0%2C215%2C0%2C210.2c0-5%2C1.8-9.3%2C5.4-12.9%20l128-127.9c3.6-3.6%2C7.8-5.4%2C12.8-5.4s9.2%2C1.8%2C12.8%2C5.4l128%2C128c3.5%2C3.5%2C5.4%2C7.8%2C5.4%2C12.8s-1.9%2C9.2-5.5%2C12.8L287%2C223z%22%2F%3E%3C%2Fsvg%3E')
+
+.label
+    font-size: calc(1 * var(--font-size-normal))
+    font-weight: 400
+    z-index: 1
+    color: #77b0c6
+    text-transform: uppercase
+
+.buttons
+    font-size: var(--font-size-normal)
+    margin-top: auto
+    display: flex
+    justify-content: space-around
+
+.platform, .platform_select
+    display: flex
+    gap: 2vh
+    font-size: calc( .7 * var(--font-size-normal))
+    & .input, .select
+        flex-grow: 1
+
+.error
+    border-color: var(--color-red)
+    white-space: nowrap
+
+.error_text
+    color: var(--color-red)
+    text-transform: uppercase
+    font-size: calc(0.8 * var(--font-size-normal))
+    position: absolute
+    top: 100%
+    left: 50%
+    translate: -50% 1vh
+
+.disabled
+    filter: saturate(0)

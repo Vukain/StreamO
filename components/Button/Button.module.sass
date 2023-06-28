@@ -1,0 +1,27 @@
+.button
+    all: unset
+    text-transform: uppercase
+    font-weight: bold
+    background: #707070
+
+    border-radius: calc(.6 * var(--border-radius))
+    padding: .5em 1em
+    cursor: pointer
+    transition: filter .3s, scale .3s ease
+    &:hover
+        filter: hue-rotate(15deg) saturate(1.2)
+        scale: 1.03
+    &:active
+        scale: 1.01
+
+.blue
+    background-image: linear-gradient(135deg, var(--color-primary-1), var(--color-subsidiary-1))
+
+.purple
+    background-image: linear-gradient(135deg, var(--color-primary-2), var(--color-subsidiary-2) )
+
+.disabled
+    background: #707070
+    &:hover, &:active
+        filter: unset
+        scale: unset

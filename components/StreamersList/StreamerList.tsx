@@ -15,7 +15,7 @@ export const StreamerList: React.FC<Props> = ({ streamers, syncStreamers }) => {
 
     return (
         <article className={styles.toplist}>
-            {streamers !== null ? streamers.map(streamer => <StreamerSummary data={streamer} syncStreamers={syncStreamers} key={streamer._id} />) : <LoadingSpinner />}
+            {streamers !== null ? streamers.map(streamer => <StreamerSummary data={streamer} syncStreamers={syncStreamers} key={streamer.streamerId} />) : <LoadingSpinner />}
         </article>
     );
 }

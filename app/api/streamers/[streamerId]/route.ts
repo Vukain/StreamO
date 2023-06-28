@@ -9,7 +9,7 @@ export const GET = async (request: NextRequest) => {
     const db = await connectToMongo();
     const id = getStreamerId(request.url);
 
-    const streamer = await db.collection("streamers").findOne({ "_id": id });
+    const streamer = await db.collection("streamers").findOne({ "streamerId": id });
 
     if (streamer) {
         return NextResponse.json({ data: streamer }, { status: 200 })

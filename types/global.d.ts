@@ -1,10 +1,7 @@
-type Link = {
-    platform: string,
-    link: string
-};
+type Link = { id?: string, platform: string, link?: string };
 
 type Streamer = {
-    _id: number,
+    streamerId: number,
     name: string,
     description: string,
     score: number,
