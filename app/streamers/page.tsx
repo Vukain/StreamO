@@ -1,20 +1,23 @@
 'use client'
 
-import { StreamerList } from "@/components/StreamersList/StreamerList";
 import styles from './page.module.sass'
+
 import { useEffect, useState } from "react";
 import { fetchStreamers } from "@/utils/fetchStreamers";
 import { Modal } from "@/components/Modal/Modal";
 import { StreamerForm } from "@/components/StreamerForm/StreamerForm";
+import { StreamerList } from "@/components/StreamersList/StreamerList";
+import { Button } from '@/components/Button/Button';
 
 const Streamers = () => {
 
-    const [streamers, setStreamers] = useState<null | Array<Streamer>>(null);
-    const [addingStreamer, setAddingStreamer] = useState(true);
+    const [streamers, setStreamers] = useState<null | Streamer[]>(null);
+    const [addingStreamer, setAddingStreamer] = useState(false);
 
     useEffect(() => {
         syncStreamers();
     }, [])
+
 
     const syncStreamers = async () => {
         try {
@@ -30,9 +33,13 @@ const Streamers = () => {
             <StreamerList streamers={streamers} syncStreamers={syncStreamers} />
 
             {addingStreamer &&
-                <Modal setActive={setAddingStreamer} autoClose={0}>
+                <Modal setActive={setAddingStreamer}>
                     <StreamerForm syncStreamers={syncStreamers} />
                 </Modal>}
+
+            <div className={styles.add_button}>
+                <Button color='purple' onClick={() => { setAddingStreamer(true) }}>add streamer</Button>
+            </div>
         </main>
     );
 };

@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
 import styles from './StreamerList.module.sass';
-import { fetchStreamers } from '@/utils/fetchStreamers';
 import { StreamerSummary } from './StreamerSummary/StreamerSummary';
 import { LoadingSpinner } from '@/ui/LoadingSpinner/LoadingSpinner';
-import { Modal } from '../Modal/Modal';
-import { StreamerForm } from '../StreamerForm/StreamerForm';
 
 type Props = {
     streamers: null | Streamer[]
@@ -13,9 +9,20 @@ type Props = {
 
 export const StreamerList: React.FC<Props> = ({ streamers, syncStreamers }) => {
 
+    const mapStreamers = () => {
+
+        if (streamers && streamers.length > 0) {
+            return streamers.map(streamer =>
+                <StreamerSummary data={streamer} syncStreamers={syncStreamers} key={streamer.streamerId} />)
+        } else {
+            return <p className={styles.empty}>Streamer list is empty...</p>
+        };
+    };
+
     return (
         <article className={styles.toplist}>
-            {streamers !== null ? streamers.map(streamer => <StreamerSummary data={streamer} syncStreamers={syncStreamers} key={streamer.streamerId} />) : <LoadingSpinner />}
+            {streamers !== null ? mapStreamers() :
+                <LoadingSpinner />}
         </article>
     );
 }

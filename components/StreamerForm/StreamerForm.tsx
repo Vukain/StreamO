@@ -1,13 +1,16 @@
 import styles from './StreamerForm.module.sass';
+import { useState } from "react";
 import { clsx } from "clsx";
 import { useFieldArray, useForm } from 'react-hook-form';
+import type { FieldArrayWithId } from "react-hook-form"
+import validator from 'validator';
 import { postStreamer } from "@/utils/postStreamer";
 import { Button } from "../Button/Button";
-import { useState } from "react";
 
 type Props = {
-    syncStreamers: () => Promise<void>
+    syncStreamers?: () => Promise<void>,
     closeModal?: () => void
+    initialStreamerData?: Streamer
 };
 
 type Link = { platform: string, link?: string };
@@ -19,7 +22,7 @@ type FormData = {
     links: Link[]
 };
 
-export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal }) => {
+export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initialStreamerData }) => {
 
     const [availablePlatforms, setAvailablePlatforms] = useState(['twitch', 'youtube', 'kick', 'tiktok', 'rumble']);
 
@@ -39,39 +42,61 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal }) => 
         name: "links"
     });
 
-    const addStreamer = (data: FormData) => {
-        console.log(data)
-
-        // console.log(getValues('links'))
-        console.log(errors.links);
-
+    const addStreamer = async (data: FormData) => {
         const streamerData = {
             name: data.name,
             streamerId: Date.now(),
             description: data.description,
             score: 0,
-            links: data.links.filter(obj => obj.link)
+            links: data.links
         };
 
-        console.log(streamerData)
-        // postStreamer(streamerData);
-        // if (closeModal) {
-        //     closeModal();
-        // };
+        try {
+            await postStreamer(streamerData);
+
+            if (syncStreamers) syncStreamers();
+            if (closeModal) closeModal();
+        } catch (error) {
+            console.log(error);
+        };
     };
 
     const addNewPlatformField = () => {
-        // console.log(errors.links);
         const selected = getValues('platforms');
         append({ platform: selected });
-        // console.log(selected)
-
         setAvailablePlatforms((prevState) => {
             const filteredPlatforms: string[] = prevState.filter(value => value !== selected);
             setTimeout(() => {
                 setValue('platforms', filteredPlatforms[0]);
             }, 100);
             return filteredPlatforms;
+        });
+    };
+
+    const mapFields = () => {
+        const fieldDelete = (index: number, obj: FieldArrayWithId<FormData, "links", "id">) => {
+            remove(index);
+            setAvailablePlatforms(prevState => {
+                const updatedPlatforms = [...prevState];
+                updatedPlatforms.push(obj.platform);
+                return updatedPlatforms;
+            });
+        };
+
+        return fields.map((obj, index) => {
+            return (
+                <div key={obj.id} className={styles.platform}>
+                    <input className={clsx(styles.input, errors.links && errors.links[index] && styles.error)}
+                        placeholder={obj.platform}
+                        type='text'
+                        {...register(`links.${index}.link` as const, {
+                            required: true,
+                            validate: value => validator.isURL(value!.trim()),
+                        })} />
+                    <Button color='purple' onClick={() => { fieldDelete(index, obj) }}>delete</Button>
+                    {/* {errors.links && errors.links[index] && <p className={styles.error_text}>This is not a proper link, fix it or delete the field.</p>} */}
+                </div>
+            );
         });
     };
 
@@ -95,28 +120,10 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal }) => 
                     <select className={clsx(styles.select, availablePlatforms.length === 0 && styles.disabled)} {...register('platforms')} disabled={availablePlatforms.length === 0}>
                         {availablePlatforms.map((platform, index) => <option value={platform} key={index}>{platform}</option>)}
                     </select>
-                    <Button text='add platform' color="blue" onClick={addNewPlatformField} disabled={availablePlatforms.length === 0} />
-                    {errors.links && <p className={styles.error_text}>At least one link must be added</p>}
+                    <Button color="blue" onClick={addNewPlatformField} disabled={availablePlatforms.length === 0}>add platform</Button>
+                    {errors.links && <p className={styles.error_text}>At least one proper link must be added</p>}
                 </div>
-                {
-                    fields.map((obj, index) => {
-                        return (
-                            <div key={obj.id} className={styles.platform}>
-                                {/* <p className={styles.platform_name}>{obj.platform}</p> */}
-                                <input className={styles.input} placeholder={obj.platform} type='text' {...register(`links.${index}.link` as const, { required: true })} />
-                                <Button text='delete' color='purple' onClick={() => {
-                                    remove(index);
-                                    setAvailablePlatforms(prevState => {
-                                        const updatedPlatforms = [...prevState];
-                                        updatedPlatforms.push(obj.platform);
-                                        return updatedPlatforms;
-                                    })
-                                }} />
-                                {errors.links && errors.links[index] && <p className={styles.error_text}>This is not a proper link, fix it or delete the field.</p>}
-                            </div>
-                        )
-                    })
-                }
+                {mapFields()}
             </ div>
         </div >
 
@@ -128,8 +135,8 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal }) => 
             {platformsInput}
 
             <div className={styles.buttons}>
-                <Button text='add streamer' color="blue" asInput={true} />
-                <Button text='cancel' color='purple' onClick={closeModal} />
+                <Button color="blue" asInput={true}>add streamer</Button>
+                <Button color='purple' onClick={closeModal}>cancel</Button>
             </div>
         </form>
     );

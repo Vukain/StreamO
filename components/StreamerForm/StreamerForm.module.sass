@@ -55,7 +55,7 @@
     font-size: calc(1 * var(--font-size-normal))
     font-weight: 400
     z-index: 1
-    color: #77b0c6
+    color: #559cb8
     text-transform: uppercase
 
 .buttons
@@ -76,6 +76,7 @@
     white-space: nowrap
 
 .error_text
+    @include flex-center
     color: var(--color-red)
     text-transform: uppercase
     font-size: calc(0.8 * var(--font-size-normal))
@@ -83,6 +84,7 @@
     top: 100%
     left: 50%
     translate: -50% 1vh
+    width: 100%
 
 .disabled
     filter: saturate(0)

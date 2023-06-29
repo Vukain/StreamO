@@ -1,9 +1,7 @@
-import type { ObjectId } from 'mongodb';
-
-export const getStreamerId = (url: string): ObjectId => {
+export const getStreamerId = (url: string): number => {
 
     const regex = /streamers[\/](\d+)/;
-    const id = parseInt(url.match(regex)![1]) as unknown as ObjectId;
+    const id = parseInt(url.match(regex)![1]);
 
     return id
 }

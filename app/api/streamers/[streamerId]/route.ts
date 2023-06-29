@@ -1,19 +1,26 @@
+import { connectMongoose } from '@/lib/mongoose';
+import { StreamerModel } from '@/models/streamerModel';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { connectToMongo } from '@/utils/connectToMongo';
-import { getStreamerId } from '@/utils/getStreamerId';
+type Context = {
+    params: {
+        streamerId: string
+    }
+};
 
-export const GET = async (request: NextRequest) => {
+export const GET = async (request: NextRequest, context: Context) => {
 
-    const db = await connectToMongo();
-    const id = getStreamerId(request.url);
+    const { streamerId } = context.params;
 
-    const streamer = await db.collection("streamers").findOne({ "streamerId": id });
-
-    if (streamer) {
-        return NextResponse.json({ data: streamer }, { status: 200 })
-    } else {
-        return NextResponse.json({ error: 'Steamer not found' }, { status: 404 })
+    try {
+        await connectMongoose();
+        const streamer = await StreamerModel.findOne({ "streamerId": parseInt(streamerId) });
+        if (!streamer) throw Error
+        return NextResponse.json({ status: 'success', message: `streamer ${streamerId} fetched`, data: streamer }, { status: 200 })
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({ status: 'fail', message: `streamer ${streamerId} not found` }, { status: 404 })
     };
-}
+
+};

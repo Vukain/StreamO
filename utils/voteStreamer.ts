@@ -2,14 +2,15 @@ type Id = number | null;
 
 export const voteStreamer = async (id: Id, value?: number) => {
 
-    const apiUrl = `/api/streamers/${id}/vote`;
+    try {
+        const apiUrl = `/api/streamers/${id}/vote`;
 
-    const response = await fetch(apiUrl, {
-        method: 'PUT'
-    })
-
-    const message = await response.json()
-    // console.log(response.status)
-
-    return message;
+        const response = await fetch(apiUrl, {
+            method: 'PATCH',
+            body: JSON.stringify({ score: 2 })
+        });
+        if (!response) throw Error
+    } catch (error) {
+        console.error(error)
+    };
 };

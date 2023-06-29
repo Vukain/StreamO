@@ -29,4 +29,9 @@ if (process.env.NODE_ENV === 'development') {
   clientPromise = client.connect()
 }
 
-export default clientPromise
+export const connectToMongo = async () => {
+  const client = await clientPromise;
+  return client.db("streamo");
+};
+
+// export clientPromise

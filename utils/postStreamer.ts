@@ -1,9 +1,12 @@
 export const postStreamer = async (data: Streamer) => {
 
-    const response = await fetch('/api/streamers', {
-        method: 'POST',
-        body: JSON.stringify(data)
-    });
-
-    console.log(response.status, JSON.stringify(data));
+    try {
+        const response = await fetch('/api/streamers', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+        if (!response) throw Error
+    } catch (error) {
+        console.error(error)
+    };
 }

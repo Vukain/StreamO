@@ -1,19 +1,20 @@
-import clsx from 'clsx';
 import styles from './Button.module.sass';
 
+import clsx from 'clsx';
+
 type Props = {
-    text: string,
     asInput?: boolean,
     onClick?: () => void,
     color?: 'purple' | 'blue',
-    disabled?: boolean
+    disabled?: boolean,
+    children?: string
 };
 
-export const Button: React.FC<Props> = ({ text, onClick = () => { }, asInput = false, color, disabled = false }) => {
+export const Button: React.FC<Props> = ({ onClick = () => { }, asInput = false, color, disabled = false, children }) => {
 
     if (asInput) {
-        return <input className={clsx(styles.button, color && styles[color], disabled && styles.disabled)} type="submit" value={text} disabled={disabled} />
+        return <input className={clsx(styles.button, color && styles[color], disabled && styles.disabled)} type="submit" value={children} disabled={disabled} />
     } else {
-        return <button className={clsx(styles.button, color && styles[color], disabled && styles.disabled)} type="button" onClick={onClick} disabled={disabled} > {text}</button >;
+        return <button className={clsx(styles.button, color && styles[color], disabled && styles.disabled)} type="button" onClick={onClick} disabled={disabled} >{children}</button >;
     };
 };

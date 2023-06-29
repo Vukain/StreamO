@@ -1,9 +1,9 @@
+import styles from './StreamerSummary.module.sass';
 import { clsx } from 'clsx'
-import { voteStreamer } from '@/utils/voteStreamer';
 import { Avatar } from '@/ui/Avatar/Avatar';
 import { ContentCard } from '@/ui/ContentCard/ContentCard';
-import styles from './StreamerSummary.module.sass';
 import { Button } from '@/components/Button/Button';
+import { voteStreamer } from '@/utils/voteStreamer';
 
 type Props = {
     data: Streamer,
@@ -13,11 +13,9 @@ type Props = {
 export const StreamerSummary: React.FC<Props> = ({ data: { streamerId, name, score }, syncStreamers }) => {
 
     const voteAndRefresh = async () => {
-        voteStreamer(streamerId).then(res => {
-            setTimeout(() => {
-                syncStreamers();
-            }, 50)
-        });
+        await voteStreamer(streamerId)
+
+        syncStreamers();
     };
 
     return (
@@ -27,7 +25,7 @@ export const StreamerSummary: React.FC<Props> = ({ data: { streamerId, name, sco
                     <div className={clsx(styles.score, score > 0 && styles.green, score < 0 && styles.red)}>{score}</div>
                     <Avatar miniature={true} />
                     <div className={styles.name}>{name}</div>
-                    <Button text='details' color='purple' onClick={() => { }} />
+                    <Button color='purple' onClick={() => { }}>details</Button>
                 </div>
             </ContentCard>
         </div>
