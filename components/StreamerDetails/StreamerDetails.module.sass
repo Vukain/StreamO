@@ -1,1 +1,36 @@
+.details
+    width: 50vw
+    z-index: 1
+    position: relative
 
+.card
+    display: grid
+    grid-template-columns: 35vh 1fr
+    grid-template-rows: 35vh 1fr
+    padding: 4vh
+    gap: 4vh
+
+.info
+
+.description
+    grid-column: 1 / 4
+    display: flex
+    flex-direction: column
+    gap: 2vh
+
+.text
+    font-size: calc(.7 * var(--font-size-normal))
+
+.label
+    font-size: calc(1.2* var(--font-size-normal))
+    font-weight: 400
+    z-index: 1
+    color: #559cb8
+    text-transform: uppercase
+
+.buttons
+    grid-column: 1 / 3
+    font-size: var(--font-size-normal)
+    margin-top: auto
+    display: flex
+    justify-content: space-around

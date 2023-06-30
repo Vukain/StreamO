@@ -1,10 +1,6 @@
-import { Lato } from 'next/font/google'
-
 import './globals.sass'
+import { Lato } from 'next/font/google'
 import { Logo } from '@/ui/Logo/Logo'
-
-
-
 
 const lato = Lato({ weight: ['300', '400', '700'], subsets: ['latin'] })
 

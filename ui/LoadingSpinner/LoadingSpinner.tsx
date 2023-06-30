@@ -5,7 +5,7 @@ export const LoadingSpinner: React.FC = () => {
     return (
         <>
             <div className={styles.spinner}><div></div><div></div><div></div><div></div></div>
-            <div className={styles.text}>Loading Streamers...</div>
+            <div className={styles.text}>Loading data...</div>
         </>
     );
 }; 

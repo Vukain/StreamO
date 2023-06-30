@@ -1,4 +1,4 @@
-export const voteStreamer = async (data: Streamer) => {
+export const updateStreamer = async (data: Streamer) => {
 
     try {
         const apiUrl = `/api/streamers/${data.streamerId}/vote`;

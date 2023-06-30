@@ -1,9 +1,8 @@
-import clsx from 'clsx';
 import styles from './StreamerKudos.module.sass';
-
-import ArrowImage from "@/public/upvote-arrow.svg";
-import { voteStreamer } from '@/utils/voteStreamer';
+import clsx from 'clsx';
+import { updateStreamer } from '@/utils/voteStreamer';
 import { useEffect, useState } from 'react';
+import ArrowImage from "@/public/upvote-arrow.svg";
 
 type Props = {
     streamer: Streamer,
@@ -16,9 +15,9 @@ export const StreamerKudos: React.FC<Props> = ({ streamer, syncStreamers }) => {
     const [cachedScore, setCachedScore] = useState(streamer.score);
 
     useEffect(() => {
-        // Throttle api calls
+        // Throttle api calls by sending bundled update
         const timeoutCall = setTimeout(() => {
-            voteStreamer({ ...streamer, score: cachedScore }).then(_ => syncStreamers())
+            updateStreamer({ ...streamer, score: cachedScore }).then(_ => syncStreamers())
         }, 300)
         return () => {
             clearTimeout(timeoutCall);

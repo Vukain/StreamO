@@ -6,6 +6,7 @@ import { notFound, usePathname } from 'next/navigation';
 import { fetchStreamers } from '@/utils/fetchStreamers';
 import { getStreamerId } from '@/utils/getStreamerId';
 import { StreamerDetails } from '@/components/StreamerDetails/StreamerDetails';
+import { LoadingSpinner } from '@/ui/LoadingSpinner/LoadingSpinner';
 
 const Streamer = () => {
 
@@ -33,7 +34,7 @@ const Streamer = () => {
 
     return (
         <main className={styles.main}>
-            {streamer && <StreamerDetails data={streamer} syncStreamers={syncStreamer} />}
+            {streamer ? <StreamerDetails data={streamer} syncStreamers={syncStreamer} /> : <LoadingSpinner />}
         </main>
     )
 };
