@@ -12,6 +12,7 @@ import { Button } from '@/components/Button/Button';
 const Streamers = () => {
 
     const [streamers, setStreamers] = useState<null | Streamer[]>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [addingStreamer, setAddingStreamer] = useState(false);
 
     useEffect(() => {
@@ -23,13 +24,16 @@ const Streamers = () => {
         try {
             const streamers = await fetchStreamers();
             setStreamers(streamers);
+            setIsLoading(false);
         } catch (error) {
             console.error(error)
         };
     };
 
+
     return (
         <main className={styles.main}>
+
             <StreamerList streamers={streamers} syncStreamers={syncStreamers} />
 
             {addingStreamer &&

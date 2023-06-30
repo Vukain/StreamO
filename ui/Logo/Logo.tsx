@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from './Logo.module.sass';
 import LogoImage from '@/public/streamo-logo.png'
-// import LogoImage from "../../public/streamo-logo.svg";
+// import LogoImage from "@/public/streamo-logo.svg";
 
 export const Logo: React.FC = () => {
 

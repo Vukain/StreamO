@@ -28,6 +28,7 @@ const StreamerSchema = new mongoose.Schema({
             platform: {
                 type: String,
                 required: [true, 'Please provide a proper platform name for this link.'],
+                enum: ['twitch', 'youtube', 'kick', 'tiktok', 'rumble'],
                 trim: true
             },
             link: {

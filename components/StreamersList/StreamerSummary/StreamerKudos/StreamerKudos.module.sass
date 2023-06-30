@@ -1,0 +1,37 @@
+@import '../../../../styles/mixins'
+
+.kudos
+    @include flex-center
+    flex-direction: column
+    height: 100%
+    width: 2vw
+    gap: .3vw
+
+.arrow
+    width: 1.8vh
+    fill: #757575
+    cursor: pointer
+    transition: fill .3s
+
+.upvote
+    &:hover
+        fill: var(--color-green)
+
+.downvote
+    rotate: 180deg
+    &:hover
+        fill: var(--color-red)
+
+.score
+    @include flex-center
+    width: 2.2vw
+    font-weight: bold
+    color: #757575
+    font-size: var(--font-size-normal)
+    margin-right: -.1em
+
+.green
+    color: var(--color-green)
+
+.red
+    color: var(--color-red)

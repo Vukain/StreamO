@@ -135,7 +135,7 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initi
             {platformsInput}
 
             <div className={styles.buttons}>
-                <Button color="blue" asInput={true}>add streamer</Button>
+                <Button color="blue" asInput={true}>save streamer</Button>
                 <Button color='purple' onClick={closeModal}>cancel</Button>
             </div>
         </form>

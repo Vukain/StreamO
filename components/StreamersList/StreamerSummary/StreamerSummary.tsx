@@ -4,28 +4,31 @@ import { Avatar } from '@/ui/Avatar/Avatar';
 import { ContentCard } from '@/ui/ContentCard/ContentCard';
 import { Button } from '@/components/Button/Button';
 import { voteStreamer } from '@/utils/voteStreamer';
+import Link from 'next/link';
+import { StreamerKudos } from './StreamerKudos/StreamerKudos';
 
 type Props = {
     data: Streamer,
     syncStreamers: () => Promise<void>
 };
 
-export const StreamerSummary: React.FC<Props> = ({ data: { streamerId, name, score }, syncStreamers }) => {
+export const StreamerSummary: React.FC<Props> = ({ data, syncStreamers }) => {
 
-    const voteAndRefresh = async () => {
-        await voteStreamer(streamerId)
+    const { streamerId, name } = data;
 
-        syncStreamers();
-    };
+
 
     return (
-        <div className={styles.wrapper} onClick={voteAndRefresh}>
+        <div className={styles.wrapper} >
             <ContentCard>
                 <div className={styles.card}>
-                    <div className={clsx(styles.score, score > 0 && styles.green, score < 0 && styles.red)}>{score}</div>
+                    <StreamerKudos streamer={data} syncStreamers={syncStreamers} />
+                    {/* <div onClick={voteAndRefresh} className={clsx(styles.score, score > 0 && styles.green, score < 0 && styles.red)}>{score}</div> */}
                     <Avatar miniature={true} />
                     <div className={styles.name}>{name}</div>
-                    <Button color='purple' onClick={() => { }}>details</Button>
+                    <Link href={`/streamers/${streamerId}`} className={styles.link}>
+                        <Button color='purple' onClick={() => { }}>details</Button>
+                    </Link>
                 </div>
             </ContentCard>
         </div>
