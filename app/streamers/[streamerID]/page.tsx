@@ -2,17 +2,17 @@
 
 import styles from './page.module.sass'
 import { useEffect, useState } from 'react';
-import { notFound, usePathname } from 'next/navigation';
+import { notFound, usePathname, useRouter } from 'next/navigation';
 import { fetchStreamers } from '@/utils/fetchStreamers';
 import { getStreamerId } from '@/utils/getStreamerId';
 import { StreamerDetails } from '@/components/StreamerDetails/StreamerDetails';
 import { LoadingSpinner } from '@/ui/LoadingSpinner/LoadingSpinner';
 
+
 const Streamer = () => {
 
     const [streamer, setStreamer] = useState<null | Streamer>(null);
     const [loadingError, setLoadingError] = useState(false);
-
     const pathname = usePathname();
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Streamer = () => {
 
     return (
         <main className={styles.main}>
-            {streamer ? <StreamerDetails data={streamer} syncStreamers={syncStreamer} /> : <LoadingSpinner />}
+            {streamer ? <StreamerDetails data={streamer} syncStreamer={syncStreamer} /> : <LoadingSpinner />}
         </main>
     )
 };

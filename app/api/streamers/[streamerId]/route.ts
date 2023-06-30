@@ -43,15 +43,16 @@ export const PUT = async (request: NextRequest, context: Context) => {
 
 export const DELETE = async (request: NextRequest, context: Context) => {
 
-
     const { streamerId } = context.params;
 
     try {
         await connectMongoose();
         await StreamerModel.deleteOne({ "streamerId": parseInt(streamerId) });
-        return NextResponse.json({ status: 'success', message: `streamer deleted` }, { status: 204 })
+        return new Response(null, {
+            status: 204,
+        });
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ status: 'success', message: `streamer deleted` }, { status: 404 })
+        return NextResponse.json({ status: 'fail', message: `streamer not found` }, { status: 404 })
     };
 };

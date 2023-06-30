@@ -4,12 +4,21 @@ import styles from './StreamerDetails.module.sass';
 import { ContentCard } from '@/ui/ContentCard/ContentCard';
 import { Button } from '../Button/Button';
 import { deleteStreamer } from '@/utils/deleteStreamer';
+import { useRouter } from 'next/navigation';
 type Props = {
     data: Streamer,
-    syncStreamers: (id: number) => void
+    syncStreamer: (id: number) => void
 };
 
-export const StreamerDetails: React.FC<Props> = ({ data: { streamerId, name, description, links }, syncStreamers }) => {
+export const StreamerDetails: React.FC<Props> = ({ data: { streamerId, name, description, links }, syncStreamer }) => {
+
+    const { push } = useRouter();
+
+    const deleteAndRedirect = () => {
+        deleteStreamer(streamerId);
+        push('/streamers');
+    };
+
 
 
     return (
@@ -28,7 +37,7 @@ export const StreamerDetails: React.FC<Props> = ({ data: { streamerId, name, des
 
                     <div className={styles.buttons}>
                         <Button color="blue" onClick={() => { }}>edit streamer</Button>
-                        <Button color='purple' onClick={() => deleteStreamer(streamerId)}>delete streamer</Button>
+                        <Button color='purple' onClick={deleteAndRedirect}>delete streamer</Button>
                     </div>
                 </div>
             </ContentCard>
