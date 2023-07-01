@@ -17,7 +17,7 @@ export const Avatar: React.FC<Props> = ({ miniature = false, avatarId }) => {
         className={styles.avatar}
         src={avatarId ? AsmonAvatar : LimmyAvatar}
         alt="streamer avatar"
-        sizes={`(orientation: portrait) ${miniature ? 10 : 20}vh, ${miniature ? 20 : 40}vh`}
+        sizes={`(orientation: portrait) ${miniature ? 10 : 20}vh, ${miniature ? 30 : 80}vw`}
       />
     </div>
   );

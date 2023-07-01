@@ -4,11 +4,12 @@
     display: flex
     flex-direction: column
     justify-content: flex-start
-
     width: 100%
     height: 100%
     gap: 3vh
     padding: 4vh
+    @media (orientation: portrait)
+        width: 90vw
 
 .input_group
     align-self: stretch
@@ -21,6 +22,8 @@
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 2vh
+    @media (orientation: portrait)
+        grid-template-columns: 1fr
 
 .input, .textarea, .select
     all: unset
@@ -38,6 +41,8 @@
 
 .textarea
     height: 20vh
+    @media (orientation: portrait)
+        height: 14vh
 
 .select
     text-transform: uppercase
@@ -63,6 +68,9 @@
     margin-top: auto
     display: flex
     justify-content: space-around
+    @media (orientation: portrait)
+        & button
+            flex-grow: 0
 
 .platform, .platform_select
     display: flex
@@ -70,6 +78,30 @@
     font-size: calc( .7 * var(--font-size-normal))
     & .input, .select
         flex-grow: 1
+
+.platform, .platform_select
+    @media (orientation: portrait)
+        font-size: 0
+        & button
+            font-size: 0
+        & .input
+            flex-grow: 0
+        & .select
+            flex-grow: 3
+
+.platform_select
+    @media (orientation: portrait)
+        & button::after
+            @include before-after
+            content: '+'
+            font-size: var(--font-size-normal)
+
+.platform
+    @media (orientation: portrait)
+        & button::after
+            @include before-after
+            content: '-'
+            font-size: var(--font-size-normal)
 
 .error
     border-color: var(--color-red)

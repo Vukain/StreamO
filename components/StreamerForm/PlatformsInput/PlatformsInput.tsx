@@ -11,6 +11,7 @@ import type {
   UseFormSetValue,
 } from 'react-hook-form';
 import { Button } from '@/components/Button/Button';
+import type { FormData } from '../StreamerForm';
 
 type Props = {
   errors: FieldErrors<FormData>;
@@ -22,14 +23,6 @@ type Props = {
   setValue: UseFormSetValue<FormData>;
   availablePlatforms: string[];
   setAvailablePlatforms: React.Dispatch<React.SetStateAction<string[]>>;
-};
-
-type FormData = {
-  name: string;
-  description: string;
-  platforms: string;
-  links: Link[];
-  id_?: any;
 };
 
 export const PlatformsInput: React.FC<Props> = ({
@@ -49,7 +42,7 @@ export const PlatformsInput: React.FC<Props> = ({
     setAvailablePlatforms((prevState) => {
       const filteredPlatforms: string[] = prevState.filter((value) => value !== selected);
       setTimeout(() => {
-        setValue('platforms', filteredPlatforms[0]);
+        setValue('platforms', filteredPlatforms[0] as Platform);
       }, 100);
       return filteredPlatforms;
     });

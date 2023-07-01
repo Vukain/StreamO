@@ -4,19 +4,25 @@ import { ContentCard } from '@/ui/ContentCard/ContentCard';
 import { Button } from '../Button/Button';
 import { deleteStreamer } from '@/utils/deleteStreamer';
 import { useRouter } from 'next/navigation';
+import KickLogo from '../../public/kick-logo.svg';
+import RumbleLogo from '../../public/rumble-logo.svg';
+import TiktokLogo from '../../public/tiktok-logo.svg';
+import TwitchLogo from '../../public/twitch-logo.svg';
+import YoutubeLogo from '../../public/youtube-logo-full.svg';
+import { Link } from './Link/Link';
 
 type Props = {
   data: Streamer;
-  syncStreamer: (id: number) => void;
   editStreamer: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const StreamerDetails: React.FC<Props> = ({
   data: { streamerId, name, description, links, avatarId },
-  syncStreamer,
   editStreamer,
 }) => {
   const { push } = useRouter();
+
+  const logos = { kick: KickLogo, rumble: RumbleLogo, tiktok: TiktokLogo, twitch: TwitchLogo, youtube: YoutubeLogo };
 
   const deleteAndRedirect = () => {
     deleteStreamer(streamerId);
@@ -28,14 +34,20 @@ export const StreamerDetails: React.FC<Props> = ({
       <ContentCard>
         <div className={styles.card}>
           <Avatar miniature={false} avatarId={avatarId} />
-          <div className={styles.info}></div>
 
-          <div className={styles.description}>
-            <p className={styles.label}>Description</p>
-            <p className={styles.text}>{description}</p>
+          <div className={styles.links}>
+            {links
+              .sort((a, b) => a.platform.localeCompare(b.platform))
+              .map(({ link, platform }) => (
+                <Link link={link!} platform={platform} icon={logos[platform]} />
+              ))}
           </div>
 
-          <div className={styles.buttons}>
+          <div className={styles.description}>
+            <p className={styles.nick}>{name}</p>
+            <p className={styles.text}>{description}</p>
+          </div>
+          <div className={styles.button}>
             <Button
               color="blue"
               onClick={() => {
@@ -44,6 +56,8 @@ export const StreamerDetails: React.FC<Props> = ({
             >
               edit streamer
             </Button>
+          </div>
+          <div className={styles.button}>
             <Button color="purple" onClick={deleteAndRedirect}>
               delete streamer
             </Button>

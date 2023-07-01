@@ -6,12 +6,16 @@
     height: 100%
     width: 2vw
     gap: .3vw
-
+    @media (orientation: portrait)
+        width: 4vw
+        gap: 2vw
 .arrow
     width: 1.8vh
     fill: #757575
     cursor: pointer
     transition: fill .3s
+    @media (orientation: portrait)
+        width: 5vw
 
 .upvote
     &:hover
@@ -30,6 +34,8 @@
     font-size: var(--font-size-normal)
     margin-right: -.1em
     user-select: none
+    @media (orientation: portrait)
+        font-size: calc(1.4*var(--font-size-normal))
 
 .green
     color: var(--color-green)

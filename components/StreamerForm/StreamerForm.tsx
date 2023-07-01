@@ -1,9 +1,6 @@
 import styles from './StreamerForm.module.sass';
-import validator from 'validator';
 import { useEffect, useState } from 'react';
-import { clsx } from 'clsx';
 import { useFieldArray, useForm } from 'react-hook-form';
-
 import { postStreamer } from '@/utils/postStreamer';
 import { updateStreamer } from '@/utils/updateStreamer';
 import { Button } from '../Button/Button';
@@ -19,10 +16,10 @@ type Props = {
 
 type Fields = 'name' | 'links' | 'description';
 
-type FormData = {
+export type FormData = {
   name: string;
   description: string;
-  platforms: string;
+  platforms: 'kick' | 'rumble' | 'tiktok' | 'twitch' | 'youtube';
   links: Link[];
   id_?: any;
 };
@@ -52,7 +49,7 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initi
         setValue(`${field as Field}`, initialStreamerData[field as Fields]);
       });
       const usedFields = initialStreamerData.links.map((link) => link.platform);
-      const updatedPlatforms = availablePlatforms.filter((available) => !usedFields.includes(available));
+      const updatedPlatforms = availablePlatforms.filter((available) => !usedFields.includes(available as Platform));
       setAvailablePlatforms(updatedPlatforms);
     }
   }, []);
@@ -98,7 +95,7 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initi
 
       <div className={styles.buttons}>
         <Button color="blue" asSubmit={true}>
-          save streamer
+          save
         </Button>
         <Button color="purple" onClick={closeModal}>
           cancel

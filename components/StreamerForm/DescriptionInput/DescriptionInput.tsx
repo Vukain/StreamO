@@ -1,18 +1,11 @@
 import clsx from 'clsx';
 import styles from './DescriptionInput.module.sass';
 import type { UseFormRegister, FieldErrors } from 'react-hook-form';
+import type { FormData } from '../StreamerForm';
 
 type Props = {
   errors: FieldErrors<FormData>;
   register: UseFormRegister<FormData>;
-};
-
-type FormData = {
-  name: string;
-  description: string;
-  platforms: string;
-  links: Link[];
-  id_?: any;
 };
 
 export const DescriptionInput: React.FC<Props> = ({ errors, register }) => {

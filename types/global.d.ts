@@ -1,4 +1,8 @@
-type Link = { id?: string; platform: string; link?: string };
+type Platform = 'kick' | 'rumble' | 'tiktok' | 'twitch' | 'youtube';
+
+type Field = 'name' | 'description' | 'platforms' | 'links';
+
+type Link = { id?: string; platform: Platform; link?: string };
 
 type Streamer = {
   _id?: any;
@@ -10,14 +14,4 @@ type Streamer = {
   links: Link[];
 };
 
-type FormData = {
-  name: string;
-  description: string;
-  platforms: string;
-  links: Link[];
-  id_?: any;
-};
-
 type StreamerKey = keyof typeof Streamer;
-
-type Field = 'name' | 'description' | 'platforms' | 'links';

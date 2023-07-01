@@ -2,28 +2,41 @@
 
 .summary
     width: 30vw
-    height: 8vh
     @media (orientation: portrait)
         width: 80vw
-        height: 10vh
-        gap: 2vw
-        padding: 0 2vw
 
 .card
     @include flex-center
     justify-content: flex-start
-    padding: 0 1vw
-    gap: 1vw
+    padding: .9vw
+    gap: .9vw
     width: 100%
     height: 100%
     position: relative
     font-size: calc(.7 * var(--font-size-normal))
+    @media (orientation: portrait)
+        padding: 4vw
+        gap: 4vw
+        display: grid
+        grid-template-columns: 1fr 20vw 5fr
+        justify-items: center
 
 .name
     color: var(--color-font)
     font-size: var(--font-size-normal)
     margin-right: auto
     user-select: none
+    grid-row: 2
+    @media (orientation: portrait)
+        margin-right: unset
+        grid-column: 1 / 4
+        font-size: calc(1.4 * var(--font-size-normal))
 
 .link
     all: unset
+    font-size: calc(.7 * var(--font-size-normal))
+    @media (orientation: portrait)
+        align-self: stretch
+        justify-self: stretch
+        display: flex
+        font-size: calc(1.1 * var(--font-size-normal))
