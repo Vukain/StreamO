@@ -1,9 +1,9 @@
-export const voteStreamer = async (data: Streamer) => {
+export const voteStreamer = async (streamerId: number, score: number) => {
   try {
-    const apiUrl = `/api/streamers/${data.streamerId}/vote`;
+    const apiUrl = `/api/streamers/${streamerId}/vote`;
     const response = await fetch(apiUrl, {
-      method: 'PUT',
-      body: JSON.stringify(data),
+      method: 'PATCH',
+      body: JSON.stringify({ score }),
     });
     if (!response) throw Error;
   } catch (error) {

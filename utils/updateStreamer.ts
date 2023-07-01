@@ -1,5 +1,4 @@
 export const updateStreamer = async (data: Streamer) => {
-  console.log('updating 222');
   try {
     const apiUrl = `/api/streamers/${data.streamerId}`;
     const response = await fetch(apiUrl, {

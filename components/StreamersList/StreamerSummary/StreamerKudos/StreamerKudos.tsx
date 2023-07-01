@@ -1,7 +1,7 @@
 import styles from './StreamerKudos.module.sass';
 import clsx from 'clsx';
-import { updateStreamer } from '@/utils/updateStreamer';
 import { useEffect, useState } from 'react';
+import { updateStreamer } from '@/utils/updateStreamer';
 import ArrowImage from '@/public/upvote-arrow.svg';
 
 type Props = {
