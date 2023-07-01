@@ -38,8 +38,8 @@ export const StreamerDetails: React.FC<Props> = ({
           <div className={styles.links}>
             {links
               .sort((a, b) => a.platform.localeCompare(b.platform))
-              .map(({ link, platform }) => (
-                <Link key={platform} link={link!} platform={platform} icon={logos[platform]} />
+              .map(({ link, platform }, index) => (
+                <Link key={index} link={link!} platform={platform} icon={logos[platform]} />
               ))}
           </div>
 
