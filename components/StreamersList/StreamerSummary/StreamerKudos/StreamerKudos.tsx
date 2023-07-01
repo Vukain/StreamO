@@ -1,6 +1,6 @@
 import styles from './StreamerKudos.module.sass';
 import clsx from 'clsx';
-import { updateStreamer } from '@/utils/voteStreamer';
+import { updateStreamer } from '@/utils/updateStreamer';
 import { useEffect, useState } from 'react';
 import ArrowImage from '@/public/upvote-arrow.svg';
 
@@ -12,15 +12,20 @@ type Props = {
 export const StreamerKudos: React.FC<Props> = ({ streamer, syncStreamers }) => {
   // Makes visual score update faster than fetching new score
   const [cachedScore, setCachedScore] = useState(streamer.score);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
     // Throttle api calls by sending bundled update
-    const timeoutCall = setTimeout(() => {
-      updateStreamer({ ...streamer, score: cachedScore }).then((_) => syncStreamers());
-    }, 300);
-    return () => {
-      clearTimeout(timeoutCall);
-    };
+    if (!firstLoad) {
+      const timeoutCall = setTimeout(() => {
+        updateStreamer({ ...streamer, score: cachedScore }).then((_) => syncStreamers());
+      }, 300);
+      return () => {
+        clearTimeout(timeoutCall);
+      };
+    } else {
+      setFirstLoad(false);
+    }
   }, [cachedScore]);
 
   const voteAndRefresh = (scoreDifference: number) => {

@@ -7,6 +7,7 @@ import validator from 'validator';
 import { postStreamer } from '@/utils/postStreamer';
 import { Button } from '../Button/Button';
 import Streamer from '@/app/streamers/[streamerID]/page';
+import { updateStreamer } from '@/utils/updateStreamer';
 
 type Props = {
   syncStreamers?: () => Promise<void>;
@@ -25,6 +26,7 @@ type FormData = {
   description: string;
   platforms: string;
   links: Link[];
+  id_?: any;
 };
 
 export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initialStreamerData }) => {
@@ -57,18 +59,23 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initi
     }
   }, []);
 
-  const addStreamer = async (data: FormData) => {
+  const saveStreamer = async (data: FormData) => {
     const streamerData = {
       name: data.name,
-      streamerId: Date.now(),
+      streamerId: initialStreamerData ? initialStreamerData.streamerId : Date.now(),
       description: data.description,
-      score: 0,
+      score: initialStreamerData ? initialStreamerData.score : 0,
       links: data.links,
       avatarId: initialStreamerData ? initialStreamerData.avatarId : Math.floor(Math.random() * 2),
     };
 
     try {
-      await postStreamer(streamerData);
+      if (initialStreamerData) {
+        console.log('updating');
+        await updateStreamer(streamerData);
+      } else {
+        await postStreamer(streamerData);
+      }
 
       if (syncStreamers) syncStreamers();
       if (closeModal) closeModal();
@@ -174,7 +181,7 @@ export const StreamerForm: React.FC<Props> = ({ syncStreamers, closeModal, initi
   );
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(addStreamer)}>
+    <form className={styles.form} onSubmit={handleSubmit(saveStreamer)}>
       {nameInput}
       {descriptionInput}
       {platformsInput}

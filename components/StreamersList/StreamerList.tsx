@@ -10,7 +10,7 @@ type Props = {
 export const StreamerList: React.FC<Props> = ({ streamers, syncStreamers }) => {
   return (
     <article className={styles.toplist}>
-      {streamers === null ? (
+      {streamers === null || streamers === undefined ? (
         <LoadingSpinner />
       ) : streamers.length > 0 ? (
         streamers.map((streamer) => (
