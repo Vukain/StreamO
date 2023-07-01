@@ -6,6 +6,6 @@ if (!MONGODB_URI) {
     throw new Error(
         'Please define the MONGODB_URI environment variable inside .env.local'
     )
-};
+}
 
-export const connectMongoose = async () => mongoose.connect(MONGODB_URI);
+export const connectMongoose = async () => mongoose.connect(MONGODB_URI)

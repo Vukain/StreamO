@@ -1,7 +1,7 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb'
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid environment variable: "MONGODB_URI"')
+    throw new Error('Invalid environment variable: "MONGODB_URI"')
 }
 
 const uri = process.env.MONGODB_URI
@@ -11,27 +11,27 @@ let client
 let clientPromise: Promise<MongoClient>
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local')
+    throw new Error('Please add your Mongo URI to .env.local')
 }
 
 let globalWithMongo = global as typeof globalThis & {
-  _mongoClientPromise: Promise<MongoClient>
+    _mongoClientPromise: Promise<MongoClient>
 }
 
 if (process.env.NODE_ENV === 'development') {
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
-  }
-  clientPromise = globalWithMongo._mongoClientPromise
+    if (!globalWithMongo._mongoClientPromise) {
+        client = new MongoClient(uri, options)
+        globalWithMongo._mongoClientPromise = client.connect()
+    }
+    clientPromise = globalWithMongo._mongoClientPromise
 } else {
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+    client = new MongoClient(uri, options)
+    clientPromise = client.connect()
 }
 
 export const connectToMongo = async () => {
-  const client = await clientPromise;
-  return client.db("streamo");
-};
+    const client = await clientPromise
+    return client.db('streamo')
+}
 
 // export clientPromise
