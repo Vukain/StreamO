@@ -11,6 +11,7 @@ export const Link: React.FC<Props> = ({ link, platform, icon: Icon }) => {
 
   return (
     <a
+      key={platform}
       href={parsedLink}
       className={styles.link}
       target="_blank"
