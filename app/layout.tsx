@@ -1,5 +1,4 @@
 import './globals.sass';
-import Head from 'next/head';
 import { Lato } from 'next/font/google';
 import { Logo } from '@/ui/Logo/Logo';
 const lato = Lato({ weight: ['300', '400', '700'], subsets: ['latin'] });
@@ -14,8 +13,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta property="og:title" content="StreamO" />
-        <meta property="og:image" content="https://stream-o.vercel.app/thumb.png" />
-        <meta property="og:description" content="All the best streamers in one place..." />
+        <meta property="og:image" content="%PUBLIC_URL%/thumb.png" />
+        <meta property="og:description" content="All the best streamers in one place." />
       </head>
       <body className={lato.className}>
         <Logo />
