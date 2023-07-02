@@ -67,7 +67,7 @@ export const PlatformsInput: React.FC<Props> = ({
             disabled={availablePlatforms.length === 0}
           >
             {availablePlatforms.map((platform, index) => (
-              <option value={platform} key={index}>
+              <option value={platform} key={platform + index}>
                 {platform}
               </option>
             ))}
