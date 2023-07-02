@@ -34,11 +34,7 @@ const Streamer = () => {
 
   return (
     <main className={styles.main}>
-      {streamer ? (
-        <StreamerDetails data={streamer} syncStreamer={syncStreamer} editStreamer={setEditingStreamer} />
-      ) : (
-        <LoadingSpinner />
-      )}
+      {streamer ? <StreamerDetails data={streamer} editStreamer={setEditingStreamer} /> : <LoadingSpinner />}
       {editingStreamer && (
         <Modal setActive={setEditingStreamer}>
           <StreamerForm syncStreamers={syncStreamer} initialStreamerData={streamer} />
