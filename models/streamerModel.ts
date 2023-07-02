@@ -25,9 +25,9 @@ const StreamerSchema = new mongoose.Schema({
   },
   avatarId: {
     type: Number,
-    // default: () => {
-    //   Math.floor(Math.random() * 2);
-    // },
+    default: () => {
+      Math.floor(Math.random() * 2);
+    },
   },
   links: {
     type: [
