@@ -3,11 +3,12 @@
 
 ## StreamO
 
-...
+All the streamers in one place.
 
 ## Features
 
-...
+- built with NextJS/Typescript paired with API routes for handling MongoDB Atlas requests
+- create, modify, delete... or simply vote on streamers (via app or API)
 
 ## Live version
 
