@@ -32,7 +32,7 @@ const Streamers = () => {
 
       {addingStreamer && (
         <Modal setActive={setAddingStreamer}>
-          <StreamerForm syncStreamers={syncStreamers} />
+          <StreamerForm />
         </Modal>
       )}
 
