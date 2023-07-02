@@ -8,7 +8,6 @@ export const fetchStreamers = async (id?: Id) => {
       method: 'GET',
     });
     const streamers = await response.json();
-
     return streamers.data;
   } catch (error) {
     console.error(error);
