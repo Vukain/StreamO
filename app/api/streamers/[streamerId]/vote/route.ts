@@ -16,11 +16,10 @@ export const PUT = async (request: NextRequest, context: Context) => {
     await connectMongoose();
     const body = await request.json();
     const streamer = await StreamerModel.updateOne({ streamerId: parseInt(streamerId) }, body);
-    if (!streamer) throw Error;
     return NextResponse.json(
       {
         status: 'success',
-        message: `streamer ${streamerId} score updated`,
+        message: `streamer ${streamerId} score updated via POST`,
         data: streamer,
       },
       { status: 201 },
@@ -39,11 +38,10 @@ export const PATCH = async (request: NextRequest, context: Context) => {
     const body = await request.json();
     const { score } = body;
     const streamer = await StreamerModel.updateOne({ streamerId: parseInt(streamerId) }, { $inc: { score: score } });
-    if (!streamer) throw Error;
     return NextResponse.json(
       {
         status: 'success',
-        message: `streamer ${streamerId} score updated`,
+        message: `streamer ${streamerId} score updated via PATCH`,
         data: streamer,
       },
       { status: 201 },

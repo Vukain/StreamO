@@ -10,7 +10,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ status: 'success', results: streamers.length, data: streamers }, { status: 200 });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ status: 'fail', message: `streamers not found` }, { status: 404 });
+    return NextResponse.json({ status: 'fail', message: `error fetching data` }, { status: 404 });
   }
 };
 
@@ -18,8 +18,20 @@ export const POST = async (request: NextRequest) => {
   try {
     await connectMongoose();
     const body = await request.json();
-    const streamer = StreamerModel.create(body);
-    if (!streamer) throw Error;
+    const { streamerId } = body;
+
+    if (await StreamerModel.findOne({ streamerId })) {
+      return NextResponse.json(
+        {
+          status: 'fail',
+          message: `streamer with ID: ${streamerId} already exists`,
+        },
+        { status: 400 },
+      );
+    }
+
+    const streamer = await StreamerModel.create(body);
+
     return NextResponse.json(
       {
         status: 'success',

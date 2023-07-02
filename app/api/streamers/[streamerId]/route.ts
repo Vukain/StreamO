@@ -17,7 +17,6 @@ export const GET = async (request: NextRequest, context: Context) => {
     const streamer = await StreamerModel.findOne({
       streamerId: parseInt(streamerId),
     });
-    if (!streamer) throw Error;
     return NextResponse.json(
       {
         status: 'success',
@@ -39,7 +38,6 @@ export const PUT = async (request: NextRequest, context: Context) => {
     await connectMongoose();
     const body = await request.json();
     const streamer = await StreamerModel.updateOne({ streamerId: parseInt(streamerId) }, body, { new: true });
-    if (!streamer) throw Error;
     return NextResponse.json(
       {
         status: 'success',
