@@ -65,11 +65,12 @@
     text-transform: uppercase
 
 .buttons
-    font-size: var(--font-size-normal)
+    font-size: calc(1.2 * var(--font-size-normal))
     margin-top: auto
     display: flex
     justify-content: space-around
     @media (orientation: portrait)
+        font-size: var(--font-size-normal)
         & button
             flex-grow: 0
 
