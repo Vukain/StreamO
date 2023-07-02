@@ -24,8 +24,8 @@ export const StreamerDetails: React.FC<Props> = ({
 
   const logos = { kick: KickLogo, rumble: RumbleLogo, tiktok: TiktokLogo, twitch: TwitchLogo, youtube: YoutubeLogo };
 
-  const deleteAndRedirect = () => {
-    deleteStreamer(streamerId);
+  const deleteAndRedirect = async () => {
+    await deleteStreamer(streamerId);
     push('/streamers');
   };
 
