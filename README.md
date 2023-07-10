@@ -3,7 +3,7 @@
 
 ## StreamO
 
-All the streamers in one place.
+All the streamers in one place, a simple fullstack project with an API.
 
 ## Features
 
